@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I▪AI探索市集设备投入清单</title>
+<style>
+  :root {
+    --primary: #1A5276;
+    --accent: #F4D03F;
+    --bg: #FAFBFC;
+    --card: #FFFFFF;
+    --text: #2C3E50;
+    --text-light: #7F8C8D;
+    --border: #E8ECF0;
+    --section-accent: #2E86C1;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, #2E86C1 100%);
+    color: white;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2em;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+  .hero .subtitle {
+    font-size: 1.1em;
+    opacity: 0.9;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .hero .budget-highlight {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--primary);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-weight: 700;
+    margin-top: 16px;
+    font-size: 1.1em;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+  .section {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--section-accent);
+  }
+  .section h2 {
+    font-size: 1.3em;
+    color: var(--primary);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section h3 {
+    font-size: 1.05em;
+    color: var(--section-accent);
+    margin: 16px 0 8px;
+  }
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .principle-card {
+    background: #F0F7FF;
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+  .principle-card .icon { font-size: 1.5em; margin-bottom: 4px; }
+  .principle-card .label { font-weight: 700; color: var(--primary); font-size: 0.95em; }
+  .principle-card .desc { font-size: 0.82em; color: var(--text-light); margin-top: 4px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.92em;
+  }
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:nth-child(even) td { background: #F8FAFB; }
+  tr:hover td { background: #EBF5FB; }
+  .budget-tag {
+    display: inline-block;
+    background: #FEF9E7;
+    color: #B7950B;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9em;
+  }
+  .priority-high {
+    display: inline-block;
+    background: #FDEDEC;
+    color: #C0392B;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85em;
+  }
+  .priority-mid {
+    display: inline-block;
+    background: #FEF9E7;
+    color: #B7950B;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85em;
+  }
+  .priority-low {
+    display: inline-block;
+    background: #EAFAF1;
+    color: #1E8449;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85em;
+  }
+  .experience-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 6px;
+    margin: 8px 0;
+  }
+  .experience-item {
+    background: #F0FFF0;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.88em;
+  }
+  .budget-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .budget-card {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .budget-card.recommended {
+    border-color: var(--accent);
+    background: #FFFBF0;
+  }
+  .budget-card .name { font-weight: 700; color: var(--primary); font-size: 1.05em; }
+  .budget-card .amount { font-size: 1.4em; color: #E74C3C; font-weight: 700; margin: 8px 0; }
+  .budget-card .note { font-size: 0.82em; color: var(--text-light); }
+  .total-bar {
+    background: linear-gradient(135deg, var(--primary), #2E86C1);
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .total-bar .amount { font-size: 1.8em; font-weight: 700; }
+  .strategy-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--primary);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    margin: 8px 0;
+  }
+  .final-section {
+    border-left-color: var(--accent);
+  }
+  .footer {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--text-light);
+    font-size: 0.85em;
+  }
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.5em; }
+    .section { padding: 18px 14px; }
+    table { font-size: 0.82em; }
+    th, td { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>I▪AI探索市集设备投入清单</h1>
+  <div class="subtitle">基础运营设备 + 六大市集设备 + 网络弱电设备 + 安全文保设备 + 物料耗材设备</div>
+  <div class="budget-highlight">一期设备专项投入 120万—180万元</div>
+</div>
+
+<div class="container">
+
+<!-- 一、设备投入总体原则 -->
+<div class="section">
+  <h2>一、设备投入总体原则</h2>
+  <p>I▪AI探索市集属于文保场景下的轻量化未来科技研学体验项目，设备投入不宜采用传统科技馆的大型固定展项模式，而应优先选择：</p>
+  <div class="principles">
+    <div class="principle-card"><div class="icon">🚚</div><div class="label">可移动</div><div class="desc">便于根据活动、客流和审批要求调整位置</div></div>
+    <div class="principle-card"><div class="icon">🔧</div><div class="label">可拆卸</div><div class="desc">不破坏文保场地原有建筑、地面和空间结构</div></div>
+    <div class="principle-card"><div class="icon">📚</div><div class="label">可课程化</div><div class="desc">每类设备都能支撑研学任务、亲子体验或市集消费</div></div>
+    <div class="principle-card"><div class="icon">🔄</div><div class="label">可复用</div><div class="desc">同一设备可用于平日研学、周末亲子、市集活动和科技节</div></div>
+    <div class="principle-card"><div class="icon">🛠️</div><div class="label">低维护</div><div class="desc">避免过多大型沉浸式、高故障率、高运维成本设备</div></div>
+  </div>
+  <p style="text-align:center; margin-top:12px;">
+    <span class="strategy-tag">基础够用 · 重点突出 · 可迭代升级</span>
+  </p>
+</div>
+
+<!-- 二、设备投入预算总表 -->
+<div class="section">
+  <h2>二、设备投入预算总表</h2>
+  <table>
+    <tr><th>模块</th><th>主要内容</th><th>预算建议</th></tr>
+    <tr><td>入口服务与票务设备</td><td>核销、收银、导览、任务护照发放</td><td><span class="budget-tag">8万—15万元</span></td></tr>
+    <tr><td>AI启蒙市集设备</td><td>AI识图、语音互动、AI认知展示</td><td><span class="budget-tag">15万—25万元</span></td></tr>
+    <tr><td>机器人市集设备</td><td>机器人套装、赛道、编程终端</td><td><span class="budget-tag">25万—40万元</span></td></tr>
+    <tr><td>未来城市市集设备</td><td>智能交通沙盘、无人配送车、智慧停车模型</td><td><span class="budget-tag">18万—30万元</span></td></tr>
+    <tr><td>AI创作市集设备</td><td>AI绘画、打印、数字头像、创作终端</td><td><span class="budget-tag">20万—35万元</span></td></tr>
+    <tr><td>自然伙伴市集设备</td><td>电子宠物、萌宠观察、生命教育设备</td><td><span class="budget-tag">15万—25万元</span></td></tr>
+    <tr><td>餐饮市集设备</td><td>智慧点餐、食材识别、餐饮展示设备</td><td><span class="budget-tag">10万—20万元</span></td></tr>
+    <tr><td>网络与弱电设备</td><td>AP、交换机、监控、机柜、布线</td><td><span class="budget-tag">30万—50万元</span></td></tr>
+    <tr><td>安全与文保设备</td><td>消防、围栏、应急、客流提示</td><td><span class="budget-tag">10万—20万元</span></td></tr>
+    <tr><td>运营物料与耗材设备</td><td>任务护照、盖章、文创打印、收纳</td><td><span class="budget-tag">8万—15万元</span></td></tr>
+  </table>
+  <div class="total-bar">
+    设备专项合计：159万—275万元<br>
+    <span style="font-size:0.85em; opacity:0.9;">一期推荐控制值：160万—180万元 ｜ 紧缩版：120万—150万元</span>
+  </div>
+</div>
+
+<!-- 三、入口服务与票务 -->
+<div class="section">
+  <h2>三、入口服务与票务设备清单</h2>
+  <p>入口服务区是游客进入市集的第一接触点，承担票务核销、任务护照发放、导览说明、咨询服务和基础数据采集功能。</p>
+  <table>
+    <tr><th>设备名称</th><th>数量建议</th><th>单价估算</th><th>小计</th></tr>
+    <tr><td>票务核销平板</td><td>2—4台</td><td>3000—5000元</td><td>0.6万—2万元</td></tr>
+    <tr><td>手持扫码核销设备</td><td>2—4台</td><td>1500—3000元</td><td>0.3万—1.2万元</td></tr>
+    <tr><td>收银设备/POS机</td><td>1—2套</td><td>3000—6000元</td><td>0.3万—1.2万元</td></tr>
+    <tr><td>入口导览互动屏</td><td>1台</td><td>1.5万—3万元</td><td>1.5万—3万元</td></tr>
+    <tr><td>电子公告屏</td><td>1台</td><td>8000—1.5万元</td><td>0.8万—1.5万元</td></tr>
+    <tr><td>对讲机</td><td>10—15台</td><td>500—1000元</td><td>0.5万—1.5万元</td></tr>
+    <tr><td>任务护照发放柜</td><td>1—2组</td><td>3000—8000元</td><td>0.3万—1.6万元</td></tr>
+    <tr><td>移动服务台</td><td>1—2组</td><td>5000—1万元</td><td>0.5万—2万元</td></tr>
+  </table>
+  <p><span class="budget-tag">预算：8万—15万元</span> <span class="priority-high">优先级：高</span></p>
+</div>
+
+<!-- 四、AI启蒙市集 -->
+<div class="section">
+  <h2>四、AI启蒙市集设备清单</h2>
+  <p>AI启蒙市集对应"未来世界"，承担AI基础认知、AI识别、AI互动、未来职业启蒙和任务导入功能。</p>
+  <table>
+    <tr><th>设备名称</th><th>数量建议</th><th>单价估算</th><th>小计</th></tr>
+    <tr><td>AI识图互动平板</td><td>6—10台</td><td>3000—5000元</td><td>1.8万—5万元</td></tr>
+    <tr><td>AI语音互动终端</td><td>2—4套</td><td>8000—1.5万元</td><td>1.6万—6万元</td></tr>
+    <tr><td>AI问答互动屏</td><td>1—2台</td><td>1.5万—3万元</td><td>1.5万—6万元</td></tr>
+    <tr><td>摄像头识别套件</td><td>2—4套</td><td>3000—8000元</td><td>0.6万—3.2万元</td></tr>
+    <tr><td>AI基础认知展台</td><td>2—3组</td><td>5000—1万元</td><td>1万—3万元</td></tr>
+    <tr><td>未来职业互动卡系统</td><td>1套</td><td>5000—1.5万元</td><td>0.5万—1.5万元</td></tr>
+    <tr><td>桌面互动设备支架</td><td>6—10套</td><td>500—1000元</td><td>0.3万—1万元</td></tr>
+    <tr><td>小型服务器/本地演示主机</td><td>1套</td><td>1万—2万元</td><td>1万—2万元</td></tr>
+  </table>
+  <p><span class="budget-tag">预算：15万—25万元</span> <span class="priority-high">优先级：高</span></p>
+  <h3>可实现体验</h3>
+  <div class="experience-list">
+    <div class="experience-item">🤖 AI识别物品</div>
+    <div class="experience-item">😊 AI识别表情</div>
+    <div class="experience-item">🗣️ AI语音问答</div>
+    <div class="experience-item">👔 AI职业角色选择</div>
+    <div class="experience-item">📕 AI任务护照激活</div>
+    <div class="experience-item">🧠 AI基础原理互动展示</div>
+  </div>
+</div>
+
+<!-- 五、机器人市集 -->
+<div class="section">
+  <h2>五、机器人市集设备清单</h2>
+  <p>机器人市集对应"智能世界"，是整个市集中动手性最强、研学转化价值最高的板块，重点支撑机器人编程、巡线、避障、搬运、竞赛和无人机任务体验。</p>
+  <table>
+    <tr><th>设备名称</th><th>数量建议</th><th>单价估算</th><th>小计</th></tr>
+    <tr><td>教育机器人套装</td><td>20—30套</td><td>3000—6000元</td><td>6万—18万元</td></tr>
+    <tr><td>编程平板/笔记本</td><td>10—15台</td><td>3500—6000元</td><td>3.5万—9万元</td></tr>
+    <tr><td>机器人巡线赛道</td><td>2—3套</td><td>8000—1.5万元</td><td>1.6万—4.5万元</td></tr>
+    <tr><td>机器人任务地垫</td><td>4—6套</td><td>2000—5000元</td><td>0.8万—3万元</td></tr>
+    <tr><td>机器人搬运任务道具</td><td>2—3套</td><td>3000—8000元</td><td>0.6万—2.4万元</td></tr>
+    <tr><td>传感器扩展包</td><td>10—20套</td><td>800—2000元</td><td>0.8万—4万元</td></tr>
+    <tr><td>小型无人机教学套装</td><td>6—10套</td><td>2000—5000元</td><td>1.2万—5万元</td></tr>
+    <tr><td>无人机安全网/围栏</td><td>1套</td><td>1万—3万元</td><td>1万—3万元</td></tr>
+    <tr><td>机器人展示柜</td><td>2—3组</td><td>5000—1万元</td><td>1万—3万元</td></tr>
+    <tr><td>充电柜</td><td>2组</td><td>8000—1.5万元</td><td>1.6万—3万元</td></tr>
+  </table>
+  <p><span class="budget-tag">预算：25万—40万元</span> <span class="priority-high">优先级：最高</span></p>
+  <h3>可实现体验</h3>
+  <div class="experience-list">
+    <div class="experience-item">🏁 机器人巡线挑战</div>
+    <div class="experience-item">🚧 机器人避障任务</div>
+    <div class="experience-item">📦 机器人搬运挑战</div>
+    <div class="experience-item">💻 图形化编程体验</div>
+    <div class="experience-item">✈️ 无人机航线规划</div>
+    <div class="experience-item">📡 传感器感知实验</div>
+    <div class="experience-item">🏆 机器人小型竞赛</div>
+  </div>
+</div>
+
+<!-- 六、未来城市市集 -->
+<div class="section">
+  <h2>六、未来城市市集设备清单</h2>
+  <p>未来城市市集对应"城市世界"，承接智能交通、无人配送、智慧停车、智慧社区等内容，是AI应用场景化表达的重要区域。</p>
+  <table>
+    <tr><th>设备名称</th><th>数量建议</th><th>单价估算</th><th>小计</th></tr>
+    <tr><td>智能交通沙盘</td><td>1套</td><td>5万—10万元</td><td>5万—10万元</td></tr>
+    <tr><td>桌面城市模型</td><td>1—2套</td><td>1万—3万元</td><td>1万—6万元</td></tr>
+    <tr><td>无人配送小车</td><td>4—8台</td><td>5000—1.2万元</td><td>2万—9.6万元</td></tr>
+    <tr><td>智慧停车模型</td><td>1—2套</td><td>1万—3万元</td><td>1万—6万元</td></tr>
+    <tr><td>红绿灯控制模型</td><td>2—3套</td><td>5000—1万元</td><td>1万—3万元</td></tr>
+    <tr><td>车牌识别演示设备</td><td>1—2套</td><td>8000—2万元</td><td>0.8万—4万元</td></tr>
+    <tr><td>城市调度互动屏</td><td>1台</td><td>1.5万—3万元</td><td>1.5万—3万元</td></tr>
+    <tr><td>任务路线地贴/地垫</td><td>2—4套</td><td>3000—8000元</td><td>0.6万—3.2万元</td></tr>
+  </table>
+  <p><span class="budget-tag">预算：18万—30万元</span> <span class="priority-high">优先级：高</span></p>
+  <h3>可实现体验</h3>
+  <div class="experience-list">
+    <div class="experience-item">🚦 智能红绿灯调度</div>
+    <div class="experience-item">📦 无人配送路线规划</div>
+    <div class="experience-item">🅿️ 智慧停车体验</div>
+    <div class="experience-item">📷 车牌识别演示</div>
+    <div class="experience-item">🏙️ 城市拥堵优化</div>
+    <div class="experience-item">🏘️ 智慧社区功能设计</div>
+  </div>
+</div>
+
+<!-- 七、AI创作市集 -->
+<div class="section">
+  <h2>七、AI创作市集设备清单</h2>
+  <p>AI创作市集对应"创造世界"，是亲子客群最容易参与、最容易出片、最容易形成二次消费的板块。</p>
+  <table>
+    <tr><th>设备名称</th><th>数量建议</th><th>单价估算</th><th>小计</th></tr>
+    <tr><td>AI绘画电脑/平板</td><td>6—10台</td><td>4000—8000元</td><td>2.4万—8万元</td></tr>
+    <tr><td>AI创作互动屏</td><td>1—2台</td><td>1.5万—3万元</td><td>1.5万—6万元</td></tr>
+    <tr><td>彩色照片打印机</td><td>2—3台</td><td>3000—8000元</td><td>0.6万—2.4万元</td></tr>
+    <tr><td>A3/A4彩色打印设备</td><td>1—2台</td><td>8000—2万元</td><td>0.8万—4万元</td></tr>
+    <tr><td>热升华照片打印机</td><td>1—2台</td><td>5000—1.2万元</td><td>0.5万—2.4万元</td></tr>
+    <tr><td>数字头像拍摄设备</td><td>1套</td><td>1万—3万元</td><td>1万—3万元</td></tr>
+    <tr><td>摄影灯/补光灯</td><td>2—4套</td><td>1000—3000元</td><td>0.2万—1.2万元</td></tr>
+    <tr><td>AI音乐体验耳机</td><td>10—20副</td><td>200—800元</td><td>0.2万—1.6万元</td></tr>
+    <tr><td>作品展示屏</td><td>1—2台</td><td>8000—1.5万元</td><td>0.8万—3万元</td></tr>
+    <tr><td>文创制作工具</td><td>1批</td><td>1万—3万元</td><td>1万—3万元</td></tr>
+  </table>
+  <p><span class="budget-tag">预算：20万—35万元</span> <span class="priority-high">优先级：高</span></p>
+  <h3>可实现体验</h3>
+  <div class="experience-list">
+    <div class="experience-item">🎨 AI绘画生成</div>
+    <div class="experience-item">🤳 AI头像生成</div>
+    <div class="experience-item">📬 AI明信片打印</div>
+    <div class="experience-item">🎵 AI音乐生成</div>
+    <div class="experience-item">🖼️ 数字作品展示</div>
+    <div class="experience-item">🎁 文创产品现场制作</div>
+    <div class="experience-item">👨‍👩‍👧 家庭纪念海报生成</div>
+  </div>
+</div>
+
+<!-- 八、自然伙伴市集 -->
+<div class="section">
+  <h2>八、自然伙伴市集设备清单</h2>
+  <p>自然伙伴市集对应"自然世界"，重点承接生命教育、萌宠观察、电子宠物互动、自然观察和AI陪伴体验。</p>
+  <table>
+    <tr><th>设备名称</th><th>数量建议</th><th>单价估算</th><th>小计</th></tr>
+    <tr><td>电子宠物互动屏</td><td>1—2台</td><td>1.5万—3万元</td><td>1.5万—6万元</td></tr>
+    <tr><td>电子宠物平板终端</td><td>6—10台</td><td>3000—5000元</td><td>1.8万—5万元</td></tr>
+    <tr><td>智能喂养展示设备</td><td>2—3套</td><td>3000—8000元</td><td>0.6万—2.4万元</td></tr>
+    <tr><td>宠物情绪识别演示设备</td><td>1—2套</td><td>8000—2万元</td><td>0.8万—4万元</td></tr>
+    <tr><td>小型萌宠观察箱</td><td>4—8组</td><td>1000—3000元</td><td>0.4万—2.4万元</td></tr>
+    <tr><td>小型围栏系统</td><td>1—2套</td><td>5000—1万元</td><td>0.5万—2万元</td></tr>
+    <tr><td>动物照护工具</td><td>1批</td><td>5000—1万元</td><td>0.5万—1万元</td></tr>
+    <tr><td>消杀清洁设备</td><td>1批</td><td>3000—8000元</td><td>0.3万—0.8万元</td></tr>
+    <tr><td>自然观察工具包</td><td>20—30套</td><td>200—500元</td><td>0.4万—1.5万元</td></tr>
+    <tr><td>AI自然识别平板</td><td>4—6台</td><td>3000—5000元</td><td>1.2万—3万元</td></tr>
+  </table>
+  <p><span class="budget-tag">预算：15万—25万元</span> <span class="priority-mid">优先级：中高</span></p>
+  <h3>可实现体验</h3>
+  <div class="experience-list">
+    <div class="experience-item">🐾 电子宠物养成</div>
+    <div class="experience-item">💕 宠物情绪识别</div>
+    <div class="experience-item">🍽️ 智能喂养展示</div>
+    <div class="experience-item">🐰 萌宠行为观察</div>
+    <div class="experience-item">📝 自然伙伴观察记录</div>
+    <div class="experience-item">🌱 生命教育任务</div>
+    <div class="experience-item">🌿 AI识别植物/昆虫/动物</div>
+  </div>
+</div>
+
+<!-- 九、餐饮市集 -->
+<div class="section">
+  <h2>九、餐饮市集设备清单</h2>
+  <p>餐饮市集不是普通餐饮区，而是"智慧点餐 + 未来能量补给 + 食材识别 + 亲子休闲"的复合体验区。</p>
+  <table>
+    <tr><th>设备名称</th><th>数量建议</th><th>单价估算</th><th>小计</th></tr>
+    <tr><td>自助点餐屏</td><td>1—2台</td><td>1万—2.5万元</td><td>1万—5万元</td></tr>
+    <tr><td>餐饮收银系统</td><td>1—2套</td><td>5000—1万元</td><td>0.5万—2万元</td></tr>
+    <tr><td>食材识别互动屏</td><td>1台</td><td>1.5万—3万元</td><td>1.5万—3万元</td></tr>
+    <tr><td>食材模型/展示柜</td><td>1—2组</td><td>5000—1.5万元</td><td>0.5万—3万元</td></tr>
+    <tr><td>取餐叫号设备</td><td>1套</td><td>3000—8000元</td><td>0.3万—0.8万元</td></tr>
+    <tr><td>冷藏展示柜</td><td>1—2台</td><td>5000—1万元</td><td>0.5万—2万元</td></tr>
+    <tr><td>饮品设备</td><td>1批</td><td>1万—3万元</td><td>1万—3万元</td></tr>
+    <tr><td>移动餐车/餐饮摊位设备</td><td>2—4组</td><td>1万—3万元</td><td>2万—12万元</td></tr>
+    <tr><td>餐饮卫生设备</td><td>1批</td><td>5000—1万元</td><td>0.5万—1万元</td></tr>
+  </table>
+  <p><span class="budget-tag">预算：10万—20万元</span> <span class="priority-mid">优先级：中</span></p>
+</div>
+
+<!-- 十、网络与弱电 -->
+<div class="section">
+  <h2>十、网络与弱电设备清单</h2>
+  <p>网络与弱电是AI探索市集的底层基础设施，支撑票务、互动屏、平板、机器人、监控、收银、Wi-Fi、设备联动和后台运营。</p>
+  <table>
+    <tr><th>设备名称</th><th>数量建议</th><th>单价估算</th><th>小计</th></tr>
+    <tr><td>企业级路由器</td><td>1—2台</td><td>3000—8000元</td><td>0.3万—1.6万元</td></tr>
+    <tr><td>核心交换机</td><td>1台</td><td>8000—2万元</td><td>0.8万—2万元</td></tr>
+    <tr><td>分区交换机</td><td>6—10台</td><td>2000—5000元</td><td>1.2万—5万元</td></tr>
+    <tr><td>室外防水AP</td><td>10—18台</td><td>1500—3500元</td><td>1.5万—6.3万元</td></tr>
+    <tr><td>室内AP</td><td>8—12台</td><td>1000—2500元</td><td>0.8万—3万元</td></tr>
+    <tr><td>网络机柜</td><td>2—4组</td><td>3000—8000元</td><td>0.6万—3.2万元</td></tr>
+    <tr><td>弱电箱</td><td>6—10组</td><td>1000—3000元</td><td>0.6万—3万元</td></tr>
+    <tr><td>光纤及网线布设</td><td>1批</td><td>5万—12万元</td><td>5万—12万元</td></tr>
+    <tr><td>监控摄像头</td><td>20—30个</td><td>800—2000元</td><td>1.6万—6万元</td></tr>
+    <tr><td>录像存储系统</td><td>1套</td><td>1万—3万元</td><td>1万—3万元</td></tr>
+    <tr><td>广播系统</td><td>1套</td><td>1万—3万元</td><td>1万—3万元</td></tr>
+    <tr><td>UPS电源</td><td>2—4套</td><td>3000—8000元</td><td>0.6万—3.2万元</td></tr>
+    <tr><td>网络调试与系统集成</td><td>1项</td><td>5万—10万元</td><td>5万—10万元</td></tr>
+  </table>
+  <p><span class="budget-tag">预算：30万—50万元</span> <span class="priority-high">优先级：最高</span></p>
+</div>
+
+<!-- 十一、安全与文保 -->
+<div class="section">
+  <h2>十一、安全与文保保护设备清单</h2>
+  <p>由于项目位于文保场景，安全设备不仅用于游客安全，也用于文保空间边界保护、客流秩序、消防应急和临时设施管理。</p>
+  <table>
+    <tr><th>设备名称</th><th>数量建议</th><th>单价估算</th><th>小计</th></tr>
+    <tr><td>灭火器</td><td>30—50具</td><td>100—300元</td><td>0.3万—1.5万元</td></tr>
+    <tr><td>应急照明灯</td><td>20—30个</td><td>100—300元</td><td>0.2万—0.9万元</td></tr>
+    <tr><td>疏散指示牌</td><td>20—30个</td><td>80—200元</td><td>0.16万—0.6万元</td></tr>
+    <tr><td>临时隔离围栏</td><td>200—400米</td><td>80—200元/米</td><td>1.6万—8万元</td></tr>
+    <tr><td>防滑地垫</td><td>1批</td><td>1万—3万元</td><td>1万—3万元</td></tr>
+    <tr><td>电缆保护槽</td><td>1批</td><td>1万—3万元</td><td>1万—3万元</td></tr>
+    <tr><td>客流提示牌</td><td>20—40个</td><td>200—800元</td><td>0.4万—3.2万元</td></tr>
+    <tr><td>文保保护提示牌</td><td>20—40个</td><td>200—800元</td><td>0.4万—3.2万元</td></tr>
+    <tr><td>医药箱/AED预留</td><td>1—2套</td><td>3000—2万元</td><td>0.3万—4万元</td></tr>
+    <tr><td>手持扩音器</td><td>4—6个</td><td>300—800元</td><td>0.12万—0.48万元</td></tr>
+  </table>
+  <p><span class="budget-tag">预算：10万—20万元</span> <span class="priority-high">优先级：最高</span></p>
+</div>
+
+<!-- 十二、运营物料 -->
+<div class="section">
+  <h2>十二、运营物料与耗材设备清单</h2>
+  <p>运营物料是I▪AI探索市集任务化运营的关键，包括任务护照、印章、徽章、证书、活动材料、收纳系统和文创制作工具。</p>
+  <table>
+    <tr><th>设备/物料名称</th><th>数量建议</th><th>单价估算</th><th>小计</th></tr>
+    <tr><td>AI探索护照</td><td>首批5000—10000本</td><td>3—8元/本</td><td>1.5万—8万元</td></tr>
+    <tr><td>任务卡</td><td>首批5000—10000张</td><td>1—3元/张</td><td>0.5万—3万元</td></tr>
+    <tr><td>市集印章</td><td>20—30枚</td><td>100—300元/枚</td><td>0.2万—0.9万元</td></tr>
+    <tr><td>徽章制作设备</td><td>1—2套</td><td>2000—8000元</td><td>0.2万—1.6万元</td></tr>
+    <tr><td>证书打印纸与耗材</td><td>1批</td><td>5000—1万元</td><td>0.5万—1万元</td></tr>
+    <tr><td>文创贴纸耗材</td><td>1批</td><td>5000—1.5万元</td><td>0.5万—1.5万元</td></tr>
+    <tr><td>活动收纳箱</td><td>30—50个</td><td>80—300元</td><td>0.24万—1.5万元</td></tr>
+    <tr><td>活动桌牌/任务牌</td><td>1批</td><td>5000—1.5万元</td><td>0.5万—1.5万元</td></tr>
+    <tr><td>学生观察工具包</td><td>200—300套</td><td>30—80元</td><td>0.6万—2.4万元</td></tr>
+    <tr><td>备用充电宝/充电线</td><td>1批</td><td>5000—1万元</td><td>0.5万—1万元</td></tr>
+  </table>
+  <p><span class="budget-tag">预算：8万—15万元</span> <span class="priority-high">优先级：高</span></p>
+</div>
+
+<!-- 十三、采购优先级 -->
+<div class="section">
+  <h2>十三、设备采购优先级建议</h2>
+  <h3>🔴 第一优先级：必须采购</h3>
+  <table>
+    <tr><th>模块</th><th>原因</th></tr>
+    <tr><td>网络与弱电设备</td><td>支撑全场设备和运营系统</td></tr>
+    <tr><td>入口服务设备</td><td>支撑票务、导览、任务发放</td></tr>
+    <tr><td>机器人市集设备</td><td>研学核心体验</td></tr>
+    <tr><td>AI启蒙市集设备</td><td>体现AI主题</td></tr>
+    <tr><td>安全与文保保护设备</td><td>文保场地运营底线</td></tr>
+    <tr><td>任务护照与运营物料</td><td>形成市集玩法闭环</td></tr>
+  </table>
+  <h3>🟡 第二优先级：建议采购</h3>
+  <table>
+    <tr><th>模块</th><th>原因</th></tr>
+    <tr><td>AI创作市集设备</td><td>传播强、消费转化强</td></tr>
+    <tr><td>未来城市市集设备</td><td>场景化、课程化价值高</td></tr>
+    <tr><td>自然伙伴市集电子宠物设备</td><td>亲子吸引力强</td></tr>
+    <tr><td>餐饮智慧点餐设备</td><td>提升体验和消费效率</td></tr>
+  </table>
+  <h3>🟢 第三优先级：可二期升级</h3>
+  <table>
+    <tr><th>模块</th><th>原因</th></tr>
+    <tr><td>大型沉浸式互动屏</td><td>投入高，可后置</td></tr>
+    <tr><td>数字孪生导览系统</td><td>一期不必过重投入</td></tr>
+    <tr><td>高端机器人矩阵</td><td>维护复杂，可逐步升级</td></tr>
+    <tr><td>大型无人机表演设备</td><td>文保场景不建议一期引入</td></tr>
+    <tr><td>全场AR导览设备</td><td>可等客流稳定后再投入</td></tr>
+  </table>
+</div>
+
+<!-- 十四、一期推荐采购组合 -->
+<div class="section">
+  <h2>十四、一期推荐采购组合</h2>
+  <div class="budget-overview">
+    <div class="budget-card">
+      <div class="name">💡 低配启动版</div>
+      <div class="amount">154万元</div>
+      <div class="note">适合预算紧张、先试运营</div>
+    </div>
+    <div class="budget-card recommended">
+      <div class="name">⭐ 标准推荐版</div>
+      <div class="amount">231万元</div>
+      <div class="note">适合正式开园，兼顾研学、亲子和周末市集</div>
+    </div>
+    <div class="budget-card">
+      <div class="name">🚀 增强体验版</div>
+      <div class="amount">275万元</div>
+      <div class="note">适合客流预期较高、希望开园即形成传播效果</div>
+    </div>
+  </div>
+</div>
+
+<!-- 十五、最终建议 -->
+<div class="section final-section">
+  <h2>十五、最终建议</h2>
+  <p>推荐采用<strong>标准推荐版</strong>，设备专项投入建议：<strong>200万—230万元</strong></p>
+  <p>重点投入：机器人市集 → AI启蒙市集 → AI创作市集 → 网络与弱电 → 安全文保 → 任务护照与运营物料</p>
+  <h3>一期总投资结构（约360万元控制）</h3>
+  <table>
+    <tr><th>投入类别</th><th>预算</th></tr>
+    <tr><td>集装箱与基础改造</td><td>70万—90万元</td></tr>
+    <tr><td>遮阳与外摆系统</td><td>35万—50万元</td></tr>
+    <tr><td>设备专项投入</td><td>160万—200万元</td></tr>
+    <tr><td>导视与移动展陈</td><td>25万—40万元</td></tr>
+    <tr><td>家具与运营物料</td><td>20万—30万元</td></tr>
+    <tr><td>安全、消防、应急</td><td>10万—20万元</td></tr>
+    <tr><td>预备费</td><td>20万—30万元</td></tr>
+  </table>
+  <div class="total-bar" style="margin-top:16px;">
+    一期总投资控制：340万—430万元<br>
+    <div class="amount" style="font-size:1.4em; margin-top:8px;">推荐控制值：380万元左右</div>
+  </div>
+  <p style="margin-top:12px; color:var(--text-light); font-size:0.9em;">该预算比原AI主题公园模式更轻，也更符合文保场地"可移动、可撤场、可恢复"的实际要求。</p>
+</div>
+
+</div>
+
+<div class="footer">
+  I▪AI探索市集 · 设备投入清单 · 2026
+</div>
+
+</body>
+</html>
